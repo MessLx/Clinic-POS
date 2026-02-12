@@ -57,7 +57,7 @@ public class AppDbContext : DbContext
         {
             e.ToTable("UserBranch"); // Match migration table name (EF default would be "UserBranches")
             e.HasKey(x => new { x.UserId, x.BranchId });
-            e.HasOne(x => x.User).WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
+            e.HasOne(x => x.User).WithMany(u => u.UserBranches).HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
             e.HasOne(x => x.Branch).WithMany().HasForeignKey(x => x.BranchId).OnDelete(DeleteBehavior.Cascade);
         });
 
